@@ -20,7 +20,6 @@ export type AIPlayChessInput = z.infer<typeof AIPlayChessInputSchema>;
 
 const AIPlayChessOutputSchema = z.object({
   aiMove: z.string().describe('The AI-generated move in algebraic notation, e.g., g8f6.'),
-  newBoardState: z.string().describe('The new board state after the AI move, in FEN notation.'),
   reasoning: z.string().describe('The AI reasoning for its move.'),
 });
 export type AIPlayChessOutput = z.infer<typeof AIPlayChessOutputSchema>;
@@ -33,29 +32,13 @@ const prompt = ai.definePrompt({
   name: 'aiChessPrompt',
   input: {schema: AIPlayChessInputSchema},
   output: {schema: AIPlayChessOutputSchema},
-  prompt: `You are a skilled chess AI. You will analyze the current board state, the user's last move (if any), and the move history to generate a good move for white.
-
-Consider both tactical and strategic factors, including:
-
-*   **Material balance:** Evaluate the value of the pieces on the board for both sides.
-*   **King safety:** Assess the safety of both kings.
-*   **Development:** Consider the development of your pieces.
-*   **User last move:** consider the user move
-
-Based on your analysis, generate a legal chess move in algebraic notation (e.g., e2e4, Ng1f3, Ra8d8). Also, state your reasoning.
-
-Output the move and the new board state in FEN notation after the move.
+  prompt: `You are a chess AI. Your goal is to make a valid and reasonable move for black.
 
 Current Board State (FEN): {{{currentBoardState}}}
-User Move: {{{userMove}}}
-Move History: {{#each moveHistory}}{{{this}}} {{/each}}
+User's last move for white: {{{userMove}}}
 
-Make sure your move is valid.
-
-
-Reasoning: [Provide detailed reasoning for the chosen move.]
-AI Move: [The AI-generated move in algebraic notation]
-New Board State (FEN): [The new board state in FEN notation]`,
+Provide your move in algebraic notation and a brief reason. The move must be valid.
+`,
 });
 
 const aiPlayChessFlow = ai.defineFlow(
