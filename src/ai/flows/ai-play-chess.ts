@@ -33,14 +33,13 @@ const prompt = ai.definePrompt({
   name: 'aiChessPrompt',
   input: {schema: AIPlayChessInputSchema},
   output: {schema: AIPlayChessOutputSchema},
-  prompt: `You are a grandmaster-level chess AI. You will analyze the current board state, the user's last move (if any), and the move history to generate the best possible move for white.
+  prompt: `You are a skilled chess AI. You will analyze the current board state, the user's last move (if any), and the move history to generate a good move for white.
 
 Consider both tactical and strategic factors, including:
 
 *   **Material balance:** Evaluate the value of the pieces on the board for both sides.
-*   **King safety:** Assess the safety of both kings and look for opportunities to attack the opponent's king or improve your own king's safety.
-*   **Pawn structure:** Analyze the pawn structure for weaknesses and opportunities.
-*   **Development:** Consider the development of your pieces and aim to control key squares and open files.
+*   **King safety:** Assess the safety of both kings.
+*   **Development:** Consider the development of your pieces.
 *   **User last move:** consider the user move
 
 Based on your analysis, generate a legal chess move in algebraic notation (e.g., e2e4, Ng1f3, Ra8d8). Also, state your reasoning.
