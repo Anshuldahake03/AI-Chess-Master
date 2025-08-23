@@ -7,7 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { suggestChessMoves } from '@/ai/flows/suggest-chess-moves';
 import type { SuggestChessMovesOutput } from '@/ai/flows/suggest-chess-moves';
 import { useToast } from '@/hooks/use-toast';
-import { Lightbulb, BrainCircuit } from 'lucide-react';
+import { Lightbulb } from 'lucide-react';
 
 type AiSuggestionProps = {
   fen: string;
@@ -47,12 +47,12 @@ export const AiSuggestion = ({ fen, turn, history, isAiThinking }: AiSuggestionP
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <BrainCircuit className="w-6 h-6" />
-          AI Assistant
+          <Lightbulb className="w-6 h-6" />
+          AI Suggestion
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <Button onClick={handleGetSuggestion} disabled={isLoading || isAiThinking} className="w-full">
+        <Button onClick={handleGetSuggestion} disabled={isLoading || isAiThinking || turn === 'b'} className="w-full">
           {isLoading ? 'Thinking...' : 'Get Suggestion'}
         </Button>
         <div className="mt-4 space-y-4">

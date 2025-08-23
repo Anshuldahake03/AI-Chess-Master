@@ -18,7 +18,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Crown, BrainCircuit } from 'lucide-react';
+import { Crown, BrainCircuit, User } from 'lucide-react';
 
 export default function Home() {
   const {
@@ -98,7 +98,20 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          <div className="lg:col-span-1 order-2 lg:order-1">
+          <div className="lg:col-span-1 order-2 lg:order-1 space-y-4">
+             <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BrainCircuit className="w-6 h-6" />
+                  AI Player (Black)
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  {turn() === 'b' && !isGameOver ? 'Thinking...' : 'Waiting for player...'}
+                </p>
+              </CardContent>
+            </Card>
             <AiSuggestion fen={fen} turn={turn()} history={history.map(h => h.san)} isAiThinking={isAiThinking} />
           </div>
 
@@ -111,7 +124,20 @@ export default function Home() {
              />
           </div>
 
-          <div className="lg:col-span-1 order-3 lg:order-3">
+          <div className="lg:col-span-1 order-3 lg:order-3 space-y-4">
+            <Card>
+                <CardHeader>
+                    <CardTitle  className="flex items-center gap-2">
+                        <User className="w-6 h-6" />
+                        You (White)
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                        {turn() === 'w' && !isGameOver ? 'Your turn to move.' : 'Waiting for AI...'}
+                    </p>
+                </CardContent>
+            </Card>
             <Card>
               <CardHeader>
                 <CardTitle>Game Info</CardTitle>
