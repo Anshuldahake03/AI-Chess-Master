@@ -1,3 +1,4 @@
+import * as React from 'react';
 import type { ChessMove } from '@/lib/types';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
