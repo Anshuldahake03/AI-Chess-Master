@@ -22,6 +22,7 @@ import { Crown, BrainCircuit } from 'lucide-react';
 
 export default function Home() {
   const {
+    game,
     board,
     move,
     reset,
@@ -105,7 +106,7 @@ export default function Home() {
              <Chessboard
                 board={board}
                 onMove={move}
-                getPossibleMoves={(square) => get(square) ? history.find(h => h.from === square || h.to === square) ? [] : game.moves({ square, verbose: true }) : []}
+                getPossibleMoves={(square) => get(square) ? game.moves({ square, verbose: true }) : []}
                 isMyTurn={turn() === playerColor && !isAiThinking && !isGameOver}
              />
           </div>
